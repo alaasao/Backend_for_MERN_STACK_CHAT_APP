@@ -8,10 +8,7 @@ const notFound = require("./middleware/not-found")
 const errorHandlerMiddleware =require("./middleware/error-handler")
 const authRouter = require("./routes/auth")
 const cookieParser=require("cookie-parser")
-// app.use(cors({
-//     origin: process.env.FRONTEND_URL,
-//     credentials:true
-// }))
+app.use(cors());
 app.use(express.json())
 app.use(cookieParser())
 const userRouter=require("./routes/user")
