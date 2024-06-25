@@ -7,13 +7,16 @@ const connectDb = require("./db/connect")
 const notFound = require("./middleware/not-found")
 const errorHandlerMiddleware =require("./middleware/error-handler")
 const authRouter = require("./routes/auth")
-
+const cookieParser=require("cookie-parser")
 // app.use(cors({
 //     origin: process.env.FRONTEND_URL,
 //     credentials:true
 // }))
 app.use(express.json())
-app.use("/auth",authRouter)
+app.use(cookieParser())
+const userRouter=require("./routes/user")
+app.use("/auth", authRouter)
+app.use("/",userRouter)
 app.use(notFound)
 app.use(errorHandlerMiddleware)
 const port = process.env.PORT || 3000
