@@ -2,11 +2,17 @@ const User=require("../models/User")
 const { StatusCodes } = require("http-status-codes")
 const {BadRequestError,UnauthenticatedError}=require("../errors/index")
 const register = async (req, res) => {
-    
+  // res.json({name:"jjkk"})
 
-    const user = await User.create({ ...req.body })
-    const token=user.generateToken()
-    res.status(StatusCodes.CREATED).json({ user: { name: user.name }, token })
+  const user = await User.create({ ...req.body })
+  const token = user.generateToken()
+  const cookieOptions = {
+    http: true,
+    secure:true
+  }
+
+res.cookie('token',token,cookieOptions).status(StatusCodes.OK).json({ user: { name: user.name }, token })
+   
 }
  
 const login = async(req,res) => {
@@ -22,7 +28,8 @@ const login = async(req,res) => {
     const isPasswordCorrect = await user.comparePassword(password)
     if (!isPasswordCorrect) {
       throw new UnauthenticatedError('password incorrect')
-    }
+  }
+  console.log(user)
 
     const token = user.generateToken()
     const cookieOptions = {

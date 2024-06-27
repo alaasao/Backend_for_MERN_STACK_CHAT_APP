@@ -12,9 +12,11 @@ const getUserDetails = async (req, res) => {
     
   
         const token = req.cookies.token || ""
-      payload = getDetailsFromToken(token)
+  payload = getDetailsFromToken(token)
+  
       
-        const user = await User.findById(payload.userId).select("-password")
+  const user = await User.findById(payload.userId).select("-password")
+  console.log(user)
 
    res.status(StatusCodes.OK).json({user:user})
     

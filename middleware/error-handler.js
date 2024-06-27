@@ -16,7 +16,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
       .map((item) => item.message)
       .join(',')
     customError.statusCode = 400
-  }
+  } 
   if (err.code && err.code === 11000) {
     customError.msg = `Duplicate value entered for ${Object.keys(
       err.keyValue   
@@ -28,7 +28,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     customError.statusCode = 404
   }
 
-  return res.status(customError.statusCode).json({ msg: customError.msg })
+  return res.status(500).json({ msg: customError.msg })
 }
 
 module.exports = errorHandlerMiddleware
