@@ -8,7 +8,7 @@ const getDetailsFromToken = (token) => {
 const getUserDetails = async (req, res) => {
 
   
-
+console.log("automatique deploy")
   const token = req.cookies.token || "";
 console.log(token)
   payload = getDetailsFromToken(token);
