@@ -34,7 +34,8 @@ const login = async(req,res) => {
     const token = user.generateToken()
     const cookieOptions = {
         http: true,
-  
+      secure: true,
+      sameSite:None
     }
     res.cookie('token',token,cookieOptions).status(StatusCodes.OK).json({ user: { name: user.name }, token })
     

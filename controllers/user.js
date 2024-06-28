@@ -7,7 +7,7 @@ const getDetailsFromToken = (token) => {
 };
 const getUserDetails = async (req, res) => {
 
-  console.log(req.cookies.token)
+  console.log(req.cookies.token,"##",req.headers)
 
   const token = req.cookies.token || "";
 console.log(token)
