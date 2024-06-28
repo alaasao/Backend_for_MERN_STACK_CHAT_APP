@@ -6,15 +6,11 @@ const getDetailsFromToken = (token) => {
   return jwt.verify(token, process.env.JWT_SECRET);
 };
 const getUserDetails = async (req, res) => {
-
-  
-console.log("automatique deploy")
   const token = req.cookies.token || "";
-console.log(token)
+
   payload = getDetailsFromToken(token);
 
   const user = await User.findById(payload.userId).select("-password");
-  console.log(user);
 
   res.status(StatusCodes.OK).json({ user: user });
 };
@@ -30,4 +26,8 @@ const updateUser = async (req, res) => {
   }
   res.status(StatusCodes.OK).json({ user });
 };
-module.exports = { getUserDetails, updateUser };
+const getAllUsers = async (req, res) => {
+  const users = await User.find({})
+  res.status(StatusCodes.OK).json({users:users})
+}
+module.exports = { getUserDetails, updateUser ,getAllUsers};
