@@ -6,10 +6,9 @@ const getDetailsFromToken = (token) => {
   return jwt.verify(token, process.env.JWT_SECRET);
 };
 const getUserDetails = async (req, res) => {
-  console.log("aaaaaaaaaaaaaaaaaa")
+
   console.log(req.cookies.token)
-  console.log(process.env.JWT_SECRET)
-  console.log("aaaaaaaaaaaaaaaaaa")
+
   const token = req.cookies.token || "";
 console.log(token)
   payload = getDetailsFromToken(token);
