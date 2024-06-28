@@ -10,7 +10,7 @@ const authRouter = require("./routes/auth")
 const cookieParser = require("cookie-parser")
 app.use(
     cors({
-      origin: "http://localhost:5173",
+      origin: ["http://localhost:5173","https://frontend-for-mern-stack-chat-app.vercel.app"],
       preflightContinue: true,
       methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
       credentials: true,

@@ -29,7 +29,7 @@ const login = async(req,res) => {
     if (!isPasswordCorrect) {
       throw new UnauthenticatedError('password incorrect')
   }
-  console.log(user)
+
 
     const token = user.generateToken()
     const cookieOptions = {
