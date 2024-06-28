@@ -1,34 +1,33 @@
-const jwt = require("jsonwebtoken")
-const { UnauthenticatedError } = require("../errors/index")
-const {StatusCodes}=require("http-status-codes")
-const User = require("../models/User")
+const jwt = require("jsonwebtoken");
+const { UnauthenticatedError } = require("../errors/index");
+const { StatusCodes } = require("http-status-codes");
+const User = require("../models/User");
 const getDetailsFromToken = (token) => {
-
-       
-return jwt.verify(token, process.env.JWT_SECRET)
-
-}
+  return jwt.verify(token, process.env.JWT_SECRET);
+};
 const getUserDetails = async (req, res) => {
-    
-  
-        const token = req.cookies.token || ""
-  payload = getDetailsFromToken(token)
-  
-      
-  const user = await User.findById(payload.userId).select("-password")
-  console.log(user)
+  console.log("aaaaaaaaaaaaaaaaaa")
+  console.log(req.cookies)
+  console.log("aaaaaaaaaaaaaaaaaa")
+  const token = req.cookies.token || "";
 
-   res.status(StatusCodes.OK).json({user:user})
-    
-}
+  payload = getDetailsFromToken(token);
+
+  const user = await User.findById(payload.userId).select("-password");
+  console.log(user);
+
+  res.status(StatusCodes.OK).json({ user: user });
+};
 const updateUser = async (req, res) => {
-  const token = req.cookies.token || ""
-  payload = getDetailsFromToken(token)
-  const user=await User.findByIdAndUpdate(payload.userId,req.body,
-    { new: true, runValidators: true }).select("-password")
-    if (!user) {
-      throw new NotFoundError(`No user with id ${payload.userId}`)
-    }
-    res.status(StatusCodes.OK).json({ user })
-}
-module.exports = {getUserDetails,updateUser}
+  const token = req.cookies.token || "";
+  payload = getDetailsFromToken(token);
+  const user = await User.findByIdAndUpdate(payload.userId, req.body, {
+    new: true,
+    runValidators: true,
+  }).select("-password");
+  if (!user) {
+    throw new NotFoundError(`No user with id ${payload.userId}`);
+  }
+  res.status(StatusCodes.OK).json({ user });
+};
+module.exports = { getUserDetails, updateUser };
