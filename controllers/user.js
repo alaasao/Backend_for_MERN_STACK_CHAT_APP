@@ -7,10 +7,11 @@ const getDetailsFromToken = (token) => {
 };
 const getUserDetails = async (req, res) => {
   console.log("aaaaaaaaaaaaaaaaaa")
-  console.log(req.cookies)
+  console.log(req.cookies.token)
+  console.log(process.env.JWT_SECRET)
   console.log("aaaaaaaaaaaaaaaaaa")
   const token = req.cookies.token || "";
-
+console.log(token)
   payload = getDetailsFromToken(token);
 
   const user = await User.findById(payload.userId).select("-password");

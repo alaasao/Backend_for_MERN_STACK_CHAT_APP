@@ -30,7 +30,7 @@ const login = async(req,res) => {
       throw new UnauthenticatedError('password incorrect')
   }
 
-
+    
     const token = user.generateToken()
     const cookieOptions = {
         http: true,
