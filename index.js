@@ -1,6 +1,7 @@
 const express = require("express")
 require("express-async-errors")
-const app = express()
+const{app,server}=require("./socket/socket")
+
 require("dotenv/config")
 const cors = require("cors")
 const connectDb = require("./db/connect")
@@ -10,7 +11,7 @@ const authRouter = require("./routes/auth")
 const cookieParser = require("cookie-parser")
 app.use(
     cors({
-      origin: ["http://localhost:5173","https://frontend-for-mern-stack-chat-app.vercel.app"],
+      origin: [process.env.LOCAL_URL,process.env.DEPLOYED_URL],
       preflightContinue: true,
       methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
       credentials: true,
@@ -33,7 +34,7 @@ const port = process.env.PORT || 3000
 const start = async() => {
     try {
         await connectDb(process.env.MONGO_URI)
-        app.listen(port, () => {
+        server.listen(port, () => {
             console.log("app is apping")
         })
     } catch (err) {
