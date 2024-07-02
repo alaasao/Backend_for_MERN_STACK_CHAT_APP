@@ -20,7 +20,8 @@
     "express-async-errors": "^3.1.1",
     "http-status-codes": "^2.3.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.4.3"
+    "mongoose": "^8.4.3",
+    "socket.io": "^4.7.5"
   },
   "engines": {
     "node": "20.5.1"
