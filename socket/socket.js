@@ -10,11 +10,18 @@ const Message = require("../models/Message");
 const getConversation = require("./getConversation");
 const io = new Server(server, {
   cors: {
-    origin: [process.env.LOCAL_URL, process.env.DEPLOYED_URL],
+    origin:  process.env.DEPLOYED_URL,
     preflightContinue: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   },
+});
+app.use((req, res, next) => {
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+    return res.status(200).json({});
+  }
+  next();
 });
 const onlineUser = [];
 io.on("connection", async (socket) => {
