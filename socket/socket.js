@@ -8,10 +8,14 @@ const User = require("../models/User");
 const Conversation = require("../models/Conversation");
 const Message = require("../models/Message");
 const getConversation = require("./getConversation");
-
-const io = new Server(server)
-  ;
-  app.use(cors())
+const io = new Server(server, {
+  cors: {
+    origin:  process.env.DEPLOYED_URL,
+    preflightContinue: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+  },
+});
 app.use((req, res, next) => {
   if (req.method === "OPTIONS") {
     res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
