@@ -9,7 +9,14 @@ const notFound = require("./middleware/not-found")
 const errorHandlerMiddleware =require("./middleware/error-handler")
 const authRouter = require("./routes/auth")
 const cookieParser = require("cookie-parser")
-const cors=require("cors")
+const cors = require("cors")
+app.use((req, res, next) => {
+    if (req.method === "OPTIONS") {
+      res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+      return res.status(200).json({});
+    }
+    next();
+  });
 app.use(cors({
     origin : process.env.DEPLOYED_URL,
     credentials : true
