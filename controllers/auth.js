@@ -36,8 +36,9 @@ const login = async (req, res) => {
   const token = user.generateToken();
   const cookieOptions = {
     http: true,
-    sameSite: "none",
+    
     secure: true,
+    sameSite: "none",
 
 };
   res
