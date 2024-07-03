@@ -9,18 +9,15 @@ const notFound = require("./middleware/not-found")
 const errorHandlerMiddleware =require("./middleware/error-handler")
 const authRouter = require("./routes/auth")
 const cookieParser = require("cookie-parser")
-const cors = require("cors")
-app.use((req, res, next) => {
-    if (req.method === "OPTIONS") {
-      res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-      return res.status(200).json({});
-    }
-    next();
-  });
-app.use(cors({
-    origin : process.env.DEPLOYED_URL,
-    credentials : true
-}))
+app.use(
+    cors({
+      origin: [process.env.LOCAL_URL,process.env.DEPLOYED_URL],
+      preflightContinue: true,
+      methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+      credentials: true,
+    })
+  );
+
 app.use(express.json())
 app.use(cookieParser())
 
