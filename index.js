@@ -11,7 +11,7 @@ const authRouter = require("./routes/auth")
 const cookieParser = require("cookie-parser")
 app.use(
     cors({
-      origin: [process.env.LOCAL_URL,process.env.DEPLOYED_URL],
+      origin:process.env.DEPLOYED_URL,
       preflightContinue: true,
       methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
       credentials: true,
