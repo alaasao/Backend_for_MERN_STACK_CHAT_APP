@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const MessageSchema = mongoose.Schema({
     text: {
         type: String,
-        required:[true,"Please provide text"]
+      
     },
     imageUrl: {
         type: String,
@@ -15,6 +15,11 @@ const MessageSchema = mongoose.Schema({
     seen: {
         type: Boolean,
         default:false
+    },
+    msgByUser:{
+        type:mongoose.Schema.ObjectId,
+        ref:"User",
+        required:true
     }
 }, {
     timestamps:true

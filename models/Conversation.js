@@ -15,6 +15,7 @@ const ConversationSchema = mongoose.Schema(
       {
         type: mongoose.Types.ObjectId,
         ref: "Message",
+        default: [],
       },
     ],
   },
