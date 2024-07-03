@@ -9,6 +9,7 @@ const notFound = require("./middleware/not-found")
 const errorHandlerMiddleware =require("./middleware/error-handler")
 const authRouter = require("./routes/auth")
 const cookieParser = require("cookie-parser")
+const cors=require("cors")
 app.use(
     cors({
       origins: [process.env.LOCAL_URL,process.env.DEPLOYED_URL],
