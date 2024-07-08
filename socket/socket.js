@@ -10,7 +10,7 @@ const Message = require("../models/Message");
 const getConversation = require("./getConversation");
 const io = new Server(server, {
   cors: {
-    origins:  '*',
+    origin:  '*',
     preflightContinue: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,

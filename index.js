@@ -24,9 +24,7 @@ app.use(cookieParser())
 const userRouter=require("./routes/user")
 app.use("/auth", authRouter)
 app.use("/", userRouter)
-app.post("/jj", (req,res) => {
-    res.json({name:"ll"})
-})
+
 app.use(notFound)
 app.use(errorHandlerMiddleware)
 const port = process.env.PORT || 3000
